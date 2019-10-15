@@ -1,22 +1,33 @@
 using System.Collections.Generic;
 
-namespace ElectricInterfaces
-{
-    public class Radionator4001 : Speakanator3001 //could play it and have a radio, this is also a turntable
+namespace ElectricInterfaces {
+    public class AllInOne : IRadio, ISpeaker, ITurnTable 
     {
+        public double CurrentSpeed { get; set; }
+        public bool IsPlaying { get; set; }
         public double CurrentFrequency { get; set; }
         public List<double> FavoriteStations { get; set; } = new List<double>();
-        //you could also do this in a constructor
         public bool IsRadioOn { get; set; }
-
+        public int Volume { get; set; }
 
         public void AddFavorite(double station)
         {
             FavoriteStations.Add(station);
         }
+
+        public void Play()
+        {
+            IsPlaying = true;
+        }
+
         public void RemoveFavorite(double station)
         {
             FavoriteStations.Remove(station);
+        }
+
+        public void stop()
+        {
+            IsPlaying = false;
         }
 
         public void TurnRadioOn()
@@ -24,5 +35,14 @@ namespace ElectricInterfaces
             IsRadioOn = false;
         }
 
+        public void VolumeDown()
+        {
+            Volume--;
+        }
+
+        public void VolumeUp()
+        {
+            Volume++;
+        }
     }
 }
